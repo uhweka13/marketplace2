@@ -23,7 +23,7 @@ class WelcomeActivity : AppIntro() {
         preferenceHelper = PreferenceHelper(this)
 
         if (preferenceHelper!!.getIntro().equals("no")) {
-            val intent = Intent(this@WelcomeActivity, SignUp::class.java)
+            val intent = Intent(this@WelcomeActivity, Login::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             this.finish()
@@ -41,7 +41,7 @@ class WelcomeActivity : AppIntro() {
 
         preferenceHelper!!.putIntro("no")
 
-        val intent = Intent(this@WelcomeActivity, SignUp::class.java)
+        val intent = Intent(this@WelcomeActivity, Login::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         this.finish()
@@ -52,7 +52,7 @@ class WelcomeActivity : AppIntro() {
 
         preferenceHelper!!.putIntro("no")
 
-        val intent = Intent(this@WelcomeActivity, SignUp::class.java)
+        val intent = Intent(this@WelcomeActivity, Login::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         this.finish()

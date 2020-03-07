@@ -6,14 +6,19 @@
 
     <string-array name="planets_array">
         <item>Select a category</item>
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+        <item>Electronics</item>
+        <item>Vegetables</item>
+        <item>Beverages</item>
+        <item>Cloths</item>
+        <item>Shoes</item>
+        <item>Bags</item>
+        <item>Building Material</item>
+        <item>Books</item>
+        <item>Kitchen Utensils</item>
+        <item>Food Stuff</item>
+        <item>Car Parts</item>
+        <item>Farming Equipments</item>
+        <item>Mechanical Tools</item>
     </string-array>
 
 </resources>

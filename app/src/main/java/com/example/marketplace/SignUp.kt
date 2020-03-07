@@ -21,68 +21,79 @@ class SignUp : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-//        bt_signup.setOnClickListener {
-//            formValidation()
-//        }
+        bt_signup.setOnClickListener {
+            formValidation()
+        }
     }
 
-//    fun formValidation(){
-//        val name = et_name_signup.text.toString().trim()
-//        val email = et_email_signup.text.toString().trim()
-//        val phoneNumber = et_phone_number.text.toString().trim()
-//        val stateSelect = et_state.text.toString().trim()
-//        val ciTy = et_city.text.toString().trim()
-//        val passWord = et_password.text.toString().trim()
-//
-//        if (name.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || stateSelect.isEmpty() || ciTy.isEmpty() ||passWord.isEmpty()){
-//            Toast.makeText(this, "check for empty field", Toast.LENGTH_LONG).show()
-//        }else{
-//
-//            hud = KProgressHUD.create(this)
-//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-//                .setLabel("Please wait")
-//                .setDetailsLabel("Creating User")
-//                .setCancellable(true)
-//                .setAnimationSpeed(2)
-//                .setDimAmount(0.5f)
-//
-//            hud.show()
-//
-//            mAuth = FirebaseAuth.getInstance()
-//            mDatabase = FirebaseDatabase.getInstance()
-//            val mUsers: DatabaseReference = mDatabase!!.reference!!.child("Users")
-//
-//            mAuth!!.createUserWithEmailAndPassword(email, passWord)
-//                .addOnCompleteListener(this, OnCompleteListener {task ->
-//
-//                    hud.dismiss()
-//                    if (task.isSuccessful){
-//
-//                        //fetch current user id
-//                        val userId = mAuth!!.currentUser!!.uid
-//
-//                        //update user profile information
-//                        val currentUserDb = mUsers!!.child(userId)
-//                        currentUserDb.child("name").setValue(name)
-//                        currentUserDb.child("email").setValue(email)
-//                        currentUserDb.child("phonenumber").setValue(phoneNumber)
-//                        currentUserDb.child("state").setValue(stateSelect)
-//                        currentUserDb.child("city").setValue(ciTy)
-//                        currentUserDb.child("uid").setValue(userId)
-//
-//                        toLogin()
-//
-//                    }else{
-//                        Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show()
-//                    }
-//                })
-//        }
-//    }
-//
-//    fun toLogin(){
-//        val intent = Intent(this, Login::class.java)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//        startActivity(intent)
-//        finish()
-//    }
+    fun formValidation(){
+        val name = et_name_signup.text.toString().trim()
+        val email = et_email_signup.text.toString().trim()
+        val phoneNumber = et_phone_number.text.toString().trim()
+        val stateSelect = et_state.text.toString().trim()
+        val ciTy = et_city.text.toString().trim()
+        val passWord = et_password.text.toString().trim()
+        val confirmPassword = et_confirmpassword.text.toString().trim()
+
+        if (name.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || stateSelect.isEmpty() || ciTy.isEmpty() ||passWord.isEmpty()){
+            Toast.makeText(this, "check for empty field", Toast.LENGTH_LONG).show()
+        }
+        else if (passWord.length < 6){
+            Toast.makeText(this, "Password is too weak!", Toast.LENGTH_LONG).show()
+        }
+        else if(passWord.equals(confirmPassword)){
+            Toast.makeText(this, "Password and Confirm password mismatch", Toast.LENGTH_LONG).show()
+        }
+        else if(!email.contains("@") || !email.contains(".")){
+            Toast.makeText(this, "Invalid email", Toast.LENGTH_LONG).show()
+        }
+        else{
+
+            hud = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("Please wait")
+                .setDetailsLabel("Creating User")
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+            hud.show()
+
+            mAuth = FirebaseAuth.getInstance()
+            mDatabase = FirebaseDatabase.getInstance()
+            val mUsers: DatabaseReference = mDatabase!!.reference!!.child("Users")
+
+            mAuth!!.createUserWithEmailAndPassword(email, passWord)
+                .addOnCompleteListener(this, OnCompleteListener {task ->
+
+                    hud.dismiss()
+                    if (task.isSuccessful){
+
+                        //fetch current user id
+                        val userId = mAuth!!.currentUser!!.uid
+
+                        //update user profile information
+                        val currentUserDb = mUsers!!.child(userId)
+                        currentUserDb.child("name").setValue(name)
+                        currentUserDb.child("email").setValue(email)
+                        currentUserDb.child("phonenumber").setValue(phoneNumber)
+                        currentUserDb.child("state").setValue(stateSelect)
+                        currentUserDb.child("city").setValue(ciTy)
+                        currentUserDb.child("uid").setValue(userId)
+
+                        toLogin()
+
+                    }else{
+                        Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show()
+                    }
+                })
+        }
+    }
+
+    fun toLogin(){
+        val intent = Intent(this, Login::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+        finish()
+    }
 }

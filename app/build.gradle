@@ -46,4 +46,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.kaopiz:kprogresshud:1.2.0'
+    implementation 'com.github.AppIntro:AppIntro:5.1.0'
+}
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
 }
